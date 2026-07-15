@@ -1,8 +1,8 @@
 class Ccc < Formula
   desc "Local command center for every Claude, Codex, and Antigravity session"
   homepage "https://github.com/amirfish1/claude-command-center"
-  url "https://github.com/amirfish1/claude-command-center/archive/refs/tags/v5.6.0.tar.gz"
-  sha256 "4098507c85da2494af3972419c1ff4da8de6897c933e64250127ff8cde2f9258"
+  url "https://github.com/amirfish1/claude-command-center/archive/refs/tags/v5.8.0.tar.gz"
+  sha256 "64786f4302f939f4024d0aec03004f2a7ccc955d62df069deef23e0b15e7b6f6"
   license "MIT"
   head "https://github.com/amirfish1/claude-command-center.git", branch: "main"
 
@@ -22,7 +22,7 @@ class Ccc < Formula
     # formula keeps working when the user's system python3 drifts.
     (bin/"ccc").write <<~SHELL
       #!/bin/bash
-      export PATH="#{Formula["python@3.12"].opt_bin}:$PATH"
+      export PATH="#{formula_opt_bin("python@3.12")}:$PATH"
       exec "#{libexec}/run.sh" "$@"
     SHELL
     (bin/"ccc").chmod 0755
@@ -75,7 +75,7 @@ class Ccc < Formula
     assert_match "--install-service", output
 
     # The wrapper should expose the core repo files under libexec.
-    assert_predicate libexec/"server.py", :exist?
-    assert_predicate libexec/"run.sh", :exist?
+    assert_path_exists libexec/"server.py"
+    assert_path_exists libexec/"run.sh"
   end
 end
