@@ -1,8 +1,8 @@
 class Ccc < Formula
   desc "Local command center for every Claude, Codex, and Antigravity session"
   homepage "https://github.com/amirfish1/claude-command-center"
-  url "https://github.com/amirfish1/claude-command-center/archive/refs/tags/v5.11.2.tar.gz"
-  sha256 "cee939f0342a5150d7e73a548e812e7782267f84760898e777f4e6f060bb57d2"
+  url "https://github.com/amirfish1/claude-command-center/archive/refs/tags/v5.11.3.tar.gz"
+  sha256 "33b47011b3285d6b1f8a6003a314e0910ebdfbbb5151db2e283b9684d937cd56"
   license "MIT"
   head "https://github.com/amirfish1/claude-command-center.git", branch: "main"
 
@@ -40,6 +40,11 @@ class Ccc < Formula
     <<~EOS
       CCC needs the Claude Code CLI to be useful:
         https://docs.claude.com/en/docs/claude-code
+
+      On first launch CCC installs WatchTower (its queue engine) into the
+      brew-managed Python. Set CCC_SKIP_WATCHTOWER=1 to opt out — the queue
+      board then runs on a fallback engine that files tickets but does not
+      dispatch workers.
 
       Optional integrations (UI surfaces light up when these exist on PATH):
         brew install gh           # GitHub PR / issue surfaces
