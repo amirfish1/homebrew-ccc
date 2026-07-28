@@ -1,8 +1,8 @@
 class Ccc < Formula
   desc "Local command center for every Claude, Codex, and Antigravity session"
   homepage "https://github.com/amirfish1/claude-command-center"
-  url "https://github.com/amirfish1/claude-command-center/archive/refs/tags/v5.17.0.tar.gz"
-  sha256 "575b15b07f66d8e12d15b1e23dbb33ca8dbaa688ecbf8a2ddd770d8e47e20394"
+  url "https://github.com/amirfish1/claude-command-center/archive/refs/tags/v5.17.1.tar.gz"
+  sha256 "0c67da7508c31c14b677f36cb56dc46fa5cfba8e85e9a74d969022e82f560073"
   license "MIT"
   head "https://github.com/amirfish1/claude-command-center.git", branch: "main"
 
