@@ -20,10 +20,14 @@ class Ccc < Formula
 
     # Wrapper on PATH. Pin python3 to the brew-managed interpreter so the
     # formula keeps working when the user's system python3 drifts.
+    # Exec the repo-root `ccc` client, not run.sh: query subcommands
+    # (sessions / spawn / models / send / ask) run the CLI client, and
+    # anything else passes through to run.sh, so `ccc` still launches the
+    # server and `ccc --install-service` still works.
     (bin/"ccc").write <<~SHELL
       #!/bin/bash
       export PATH="#{formula_opt_bin("python@3.12")}:$PATH"
-      exec "#{libexec}/run.sh" "$@"
+      exec "#{libexec}/ccc" "$@"
     SHELL
     (bin/"ccc").chmod 0755
   end
@@ -73,14 +77,16 @@ class Ccc < Formula
   end
 
   test do
-    # Smoke test: the launcher should print its usage banner and exit 0
-    # without needing Claude Code or a free port.
+    # Smoke test: the CLI client should print its subcommand help and exit 0
+    # without needing Claude Code, a running server, or a free port.
     output = shell_output("#{bin}/ccc --help")
-    assert_match "Usage:", output
-    assert_match "--install-service", output
+    assert_match "sessions", output
+    assert_match "spawn", output
+    assert_match "send", output
 
     # The wrapper should expose the core repo files under libexec.
     assert_path_exists libexec/"server.py"
     assert_path_exists libexec/"run.sh"
+    assert_path_exists libexec/"ccc"
   end
 end
